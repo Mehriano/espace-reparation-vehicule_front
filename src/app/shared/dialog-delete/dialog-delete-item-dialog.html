@@ -1,0 +1,9 @@
+<h1 mat-dialog-title> Delete {{data.item}}</h1>
+<div mat-dialog-content>
+  <p>Are you sure You want to delete this {{data.item}}?</p>
+  <p> {{data.item}} : {{data.name}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" tabindex="2">Ok</button>
+  <button mat-button (click)="onNoClick()" tabindex="-1">No Thanks</button>
+</div>

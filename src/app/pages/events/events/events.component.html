@@ -1,0 +1,45 @@
+<app-content-header [icon]="'format_line_spacing'" [title]="'Filtering'" [hideBreadcrumb]="false" [hasBgImage]="true"
+  [class]="'pb-4'"></app-content-header>
+
+<div fxLayout="column" class="p-2">
+  <div class="p-2">
+    <div fxLayout="column" class="mat-elevation-z8">
+      <mat-form-field class="px-3 py-1">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type to filter all columns">
+      </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="data" matSort class="mat-elevation-z8">
+      <ng-container matColumnDef="client">
+        <mat-header-cell *matHeaderCellDef mat-sort-heade> client </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.vehicule.proprietaire.prenom}}
+          {{element.vehicule.proprietaire.nom}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Model de voiture">
+        <mat-header-cell *matHeaderCellDef mat-sort-heade> Model </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.vehicule.modele}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Immatriculation">
+        <mat-header-cell *matHeaderCellDef mat-sort-heade> Immatriculation </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.vehicule.immatriculation}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="issue à">
+        <mat-header-cell *matHeaderCellDef mat-sort-heade> issue à</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.issuedAt}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="etat">
+        <mat-header-cell *matHeaderCellDef mat-sort-heade> etat </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.etat.description}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Supprimer</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-button (click)="openDialog($event, row)">
+            <mat-icon matPrefix class="mat-icon-sm mb-2 mr-2 secondary-text-color" color="warn">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/editevent/', row._id]"></mat-row>
+    </mat-table>
+  </div>
+</div>

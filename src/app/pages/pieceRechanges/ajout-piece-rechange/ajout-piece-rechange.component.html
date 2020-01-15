@@ -1,0 +1,80 @@
+<app-content-header icon="dashboard" desc="Ajout Piece de rechange !" [hideBreadcrumb]="true" [hasBgImage]="true"
+  [class]="'py-3'"></app-content-header>
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" (click)="pieceRechangeDetails()">
+      <mat-icon>info</mat-icon>
+    </a>
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="pieceRechangeForm" (ngSubmit)="onFormSubmit(pieceRechangeForm.value)">
+      <div>
+        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom" required>
+          <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+          <mat-error>Nom est obligatoire!</mat-error>
+        </mat-form-field>
+
+      </div>
+      <div>
+
+        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-label>numSerie</mat-label>
+          <input matInput formControlName="numSerie" required>
+          <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+          <mat-error>numSerie est obligatoire!</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div>
+
+        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-label> prix</mat-label>
+          <input matInput formControlName="prix" required>
+          <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+          <mat-error> Prix est obligatoire!</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+
+        <div>
+
+          <mat-label>Disponible</mat-label>
+          <mat-slide-toggle value="pieceRechangeForm.controls.disponible.value"
+            (click)="pieceRechangeForm.controls.disponible.value =!pieceRechangeForm.controls.disponible.value"
+            class="mx-2" formControlName="disponible" [color]="'Red'">
+          </mat-slide-toggle>
+
+        </div>
+
+
+      </div>
+
+      <div *ngIf="!pieceRechangeForm.controls.disponible.value">
+
+        <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+          <mat-label>Durée de commande </mat-label>
+
+          <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="dureeComande">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+
+          <mat-error>durée de commande est obligatoire!</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="button-row">
+        <button type="submit" [disabled]="!pieceRechangeForm.valid" mat-flat-button color="primary">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

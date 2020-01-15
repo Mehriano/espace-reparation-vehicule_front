@@ -1,0 +1,23 @@
+<h1> New event by {{event.vehicule.proprietaire.nom}} {{event.vehicule.proprietaire.prenom}}</h1>
+<h2> les details de la voiture</h2>
+<p>immatriculation: {{event.vehicule.immatriculation}}</p>
+<p>marque: {{event.vehicule.marque}}</p>
+<p>modele: {{event.vehicule.modele}}</p>
+<p>Kilométrage : {{event.vehicule.kilometrage}}</p>
+<p>taille du moteur: {{event.vehicule.sizeMoteur}}</p>
+<p>energie: {{event.vehicule.energie}}</p>
+<p>dMC: {{event.vehicule.dMC}}</p>
+<h2> l'evenement de réparation</h2>
+<h3>
+  l'Observation:
+</h3>
+<p>{{event.observation}}</p>
+<h3>
+  Travail demandé
+</h3>
+<p> {{event.travailDemande}}</p>
+<h3>
+  commance le : {{event.dateRep}}
+</h3>
+<button mat-button (click)="confirmEvent()">Confirmer</button>
+<button mat-button (click)="anuller()">Anuuler</button>

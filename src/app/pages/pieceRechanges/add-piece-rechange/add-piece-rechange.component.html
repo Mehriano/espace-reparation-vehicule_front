@@ -1,0 +1,64 @@
+<mat-dialog-content>
+  <form [formGroup]="pieceRechangeForm">
+    <div>
+
+      <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="nom" required>
+        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+        <mat-error>Nom est obligatoire!</mat-error>
+      </mat-form-field>
+
+    </div>
+    <div>
+
+      <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+        <mat-label>numSerie</mat-label>
+        <input matInput formControlName="numSerie" required>
+        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+        <mat-error>numSerie est obligatoire!</mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div>
+
+      <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+        <mat-label> prix</mat-label>
+        <input matInput formControlName="prix" required>
+        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+        <mat-error> Prix est obligatoire!</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div>
+
+      <mat-label>Disponible</mat-label>
+      <mat-slide-toggle value="pieceRechangeForm.controls.disponible.value"
+        (click)="pieceRechangeForm.controls.disponible.value =!pieceRechangeForm.controls.disponible.value" class="mx-2"
+        formControlName="disponible" [color]="'Red'">
+      </mat-slide-toggle>
+
+    </div>
+
+    <div *ngIf="!pieceRechangeForm.controls.disponible.value">
+
+      <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+        <mat-label>Durée de commande </mat-label>
+
+        <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="dureeComande">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-error>durée de commande est obligatoire!</mat-error>
+      </mat-form-field>
+
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="mat-button" mat-button (click)="close()">Cancel</button>
+  <button class="mat-button" mat-button [disabled]="!pieceRechangeForm.valid" (click)="save()" cdkFocusInitial
+    color="primary">Create</button>
+</mat-dialog-actions>

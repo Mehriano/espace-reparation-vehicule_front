@@ -1,0 +1,71 @@
+<app-content-header [icon]="'format_line_spacing'" [title]="'traiter événement'" [hideBreadcrumb]="false"
+  [hasBgImage]="true" [class]="'pb-4'"></app-content-header>
+<div>
+  <mat-horizontal-stepper [linear]="'false'" #stepper>
+    <mat-step label="en Attente de confirmation">
+      confirmer demande
+      <button mat-button (click)="confirm()">Confirm</button>
+    </mat-step>
+    <mat-step label="en Attente de voiture">
+      en attente de votre voiture
+      <button mat-button (click)="confirm()">Confirmer la reception de la voiture</button>
+    </mat-step>
+    <mat-step [stepControl]="reparationCostForm">
+      <form [formGroup]="reparationCostForm" (ngSubmit)=onFormSubmit(reparationCostForm.value)>
+        <ng-template matStepLabel>Diagnostique</ng-template>
+        <p>si le diagnostique est términé specifier les pieces de rechanges nessaicaire ainsi que le prix totale:</p>
+        <div>
+          <button mat-button type="button" (click)="addPiece()"> ajout piece de rechange</button>
+        </div>
+        <div>
+          <input type="text" placeholder="ajouter des pieces de rechanges" aria-label="Number" matInput
+            [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let piece of pieces" (click)="getSelectedElementId(piece)">
+              {{ piece.nom }}
+            </mat-option>
+          </mat-autocomplete>
+
+        </div>
+        <div>
+          <div fxLayout="row wrap">
+            <div fxFlex="50" fxFlex.xl="16.6" fxFlex.lg="16.6" fxFlex.md="33.3" fxFlex.sm="33.3" class="p-2"
+              *ngFor="let selectedPiece of selectedPieces">
+              <mat-card class="gradient-pink tile p-2">
+                <mat-icon>shopping_cart</mat-icon>
+                <h2>{{selectedPiece.nom}}</h2>
+                <p>{{selectedPiece.prix}}</p>
+                <button (click)="delete(selectedPiece.numSerie)"> X</button>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+            <mat-label>prix Main d'oeuvre</mat-label>
+            <input matInput formControlName="prixMainDOeuvre" required>
+            <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+            <mat-error>le prix est obligatoire!</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button mat-button type="submit"> confirmer</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>en Cours de commande et réparation</ng-template>
+      quand la reparion se termine confirme la reparation
+      <button mat-button matStepperNext (click)="confirm()">confirmer</button>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      votre voiture est prête, vous pouvez venir la récupérer à tout moment et terminer la procédure de paiement. merci
+      d'avoir choisi notre service
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+<div *ngIf="eventRep?.etat == 0">
+  cet evenment de réparation est annulé!!
+</div>

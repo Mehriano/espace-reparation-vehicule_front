@@ -1,0 +1,40 @@
+<app-content-header icon="dashboard" desc="Suivre votre événement de répraration !" [hideBreadcrumb]="true"
+  [hasBgImage]="true" [class]="'py-3'"></app-content-header>
+<div *ngIf="event?.etat.order!=0">
+  <mat-horizontal-stepper [linear]="false" #stepper>
+    <mat-step label="en Attente de confirmation">
+      veuillez patienter, nous allons traiter votre demande dans les plus brefs délais
+      <button mat-button (click)="anuller()">Anuuler</button>
+    </mat-step>
+    <mat-step label="en Attente de voiture">
+      en attente de votre voiture
+      <button mat-button (click)="anuller()">Anuuler</button>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>en Cours de Diagnostique</ng-template>
+      votre voiture a été reçue et nous la diagnostiquons actuellement, veuillez patienter
+    </mat-step>
+    <mat-step>
+
+      <ng-template matStepLabel>approvisionnemt et réparation </ng-template>
+      <div>
+        <button mat-button matStepperNext (click)="confirmPrice()">confirmer</button>
+        <button mat-button (click)="anuller()">Anuuler</button>
+      </div>
+
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>en Cours de commande et réparation</ng-template>
+      on est entrient de réparer votre voiture, veuillez patienter!
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      votre voiture est prête, vous pouvez venir la récupérer à tout moment et terminer la procédure de paiement. merci
+      d'avoir choisi notre service
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+<div *ngIf="event"></div>
+<div *ngIf="this.event?.etat.order==0">
+  cet evenment de réparation est annulé!!
+</div>

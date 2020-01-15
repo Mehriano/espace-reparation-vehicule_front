@@ -1,0 +1,14 @@
+<app-content-header icon="dashboard" desc="Welcome !" [hideBreadcrumb]="true" [hasBgImage]="true" [class]="'py-3'">
+</app-content-header>
+<div fxLayout="row wrap" *ngIf="data">
+
+    <div *ngFor="let e of data" fxFlex="50" fxFlex.xl="30.6" fxFlex.lg="30.6" fxFlex.md="33.3" fxFlex.sm="33.3"
+        class="p-2">
+        <mat-card class=" tile p-2" [ngClass]="(e.etat.order=='1')?'gradient-green': 'gradient-red'">
+            <mat-icon>monetization_on</mat-icon>
+            <h2>{{e.etat.description}}</h2>
+            <p>{{e.vehicule.proprietaire.prenom}} {{e.vehicule.proprietaire.nom}}</p>
+        </mat-card>
+
+    </div>
+</div>
